@@ -10,9 +10,11 @@ class ListsController < ApplicationController
   end
 
   def show
-    @movies = Movie.all
+    @movies = @list.movies
+    @bookmark = Bookmark.new(list: @list)
+    @bookmarks = @list.bookmarks
   end
-  
+
   def create
     @list = List.new(params_list)
     @list.save
