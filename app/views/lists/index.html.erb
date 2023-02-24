@@ -1,13 +1,21 @@
 <h1> All my lists </h1>
-<ul>
-  <% @lists.each do |list| %>
-    <li><%= link_to list.name, list_path(list) %></li>
-  <% end  %>
-</ul>
-<%= link_to "Add new list", new_list_path, class: "btn btn-primary" %>
-</ul>
 
-<%= cl_image_tag("https://res.cloudinary.com/dbglim49p/image/upload/v1677237867/ejtgdpccnlj5phmlsvcl.jpg",
-    width: 400, height: 300, crop: :fill) %>
-<%= cl_image_tag("https://res.cloudinary.com/dbglim49p/image/upload/v1677237866/qvrgsqne5s9onz0kbtay.jpg",
-    width: 150, height: 150, crop: :thumb, gravity: :face) %>
+<div class="container">
+  <% @lists.each do |list| %>
+    <%= link_to list_path(list) do %>
+      <div class="card-product my-2">
+        <% if list.photo.attached? %>
+          <%= cl_image_tag list.photo.key, height: 300, width: 400, crop: :fill %>
+        <% else %>
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+        <% end %>
+        <div class="card-product-infos">
+          <h2> <%= list.name %> </h2>
+          <p>Discover now!</p>
+        </div>
+      </div>
+    <% end  %>
+  <% end  %>
+</div>
+
+<%= link_to "Add new list", new_list_path, class: "btn btn-primary" %>
