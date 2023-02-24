@@ -1,14 +1,13 @@
 <h1><%= @list.name %></h1>
 
+
 <% @list.bookmarks.each do |bookmark| %>
     <h3><%= bookmark.movie.title %></h3>
     <p><%= bookmark.movie.overview %></p>
-    <%= link_to 'Delete', list_bookmarks_path(bookmark), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to "Delete", list_bookmark_path(bookmark),data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
   <% end %>
 </ul>
-
 <%= link_to 'Back to the list', lists_path %>
-
 <%= simple_form_for [@list, @bookmark] do |f| %>
   <%= f.hidden_field :list_id, value: @list.id %>
   <%= f.association :movie %>
